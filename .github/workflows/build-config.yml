@@ -83,7 +83,6 @@ jobs:
       uses: P3TERX/ssh2actions@v1.0.0
 
     - name: Organize files
-      id: organize
       run: |
         cd openwrt
         mkdir -p /tmp/upload
@@ -91,9 +90,8 @@ jobs:
 
     - name: Upload Config
       uses: actions/upload-artifact@main
-      if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
-        name: OpenWrt-${{ env.DEVICE_NAME }}-Config
+        name: OpenWrt-Config
         path: /tmp/upload
 
     - name: Delete workflow runs
